@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Blackjack</title>
+		<style>
+		form {
+		display: inline;
+		}
+		
+		.section {
+		width: 40%;
+		display: inline-block;
+		}
+		
+		h2 {
+			color: red;
+		}
+		
+		</style>
+	</head>
+	<body>
+	<div class ="section">
+		<h1>Let's play Blackjack! &spades; <font color="red"> &hearts; </font>&clubs; <font color="red">&diams;</font></h1>
+		<h2>{{winner}}</h2>
+		
+		{{#canShowBetButton}}
+		<form method="post" action="/bet">
+			$<input autofocus type="number" step="any" required name ="bet">
+  			<button>Bet!</button>
+		</form>
+		{{/canShowBetButton}}
+		{{#canShowHitStand}}
+		<form method="post" action="/hit">
+  			<button>Hit!</button>
+		</form>
+		<form method="post" action="/stand">
+  			<button>Stand!</button>
+		</form>
+		{{/canShowHitStand}}
+ 		<form method="post" action="/startover">
+  			<button>Start over!</button>
+		</form>
+		
+  		<hr>
+		
+		<h3>DEALER</h3>
+		{{#dealer.Cards}}
+			<div>{{ . }}</div>
+		{{/dealer.Cards}}
+		<br>
+		{{#dealer.DealerValues}}
+			<div> Possible total: {{ . }}</div>
+		{{/dealer.DealerValues}}
+		
+		<hr>
+		<h3>PLAYER</h3>
+		{{#player.Cards}}
+			<div>{{ . }}</div>
+		{{/player.Cards}}
+		<br>
+		{{#player.PlayerValues}}
+			<div>Possible total: {{ . }}</div>
+		{{/player.PlayerValues}}
+		<hr>
+		<div>Amount bet: ${{currentBet}} </div>
+		<div>Wallet: ${{player.Wallet}}</div>
+		<div>Number of cards left in deck: {{dealer.numberOfCardsLeft}} </div>
+		</div>
+		
+	</body>
+</html>
